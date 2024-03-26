@@ -1,10 +1,24 @@
 <?php
-// Получение данных из POST запроса
+// Подключаемся к базе данных MDB
+$dbFile = 'database.mdb'; // Путь к файлу базы данных MDB
+$conn = new COM('ADODB.Connection');
+$conn->Open("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=$dbFile");
+
+// Получаем данные из POST запроса
 $data = $_POST['data'];
 
-// Ваш код для обработки данных и доступа к базе данных
-// Например, здесь можно выполнить запрос к базе данных
+// Выполняем запрос к базе данных (пример)
+$sql = "INSERT INTO TableName (ColumnName) VALUES ('$data')";
+$rs = $conn->Execute($sql);
 
-// Возвращаем ответ клиенту (в данном случае просто эхо)
-echo 'Received data: ' . $data;
-?>﻿
+// Проверяем успешность выполнения запроса
+if ($rs) {
+    echo 'Data inserted successfully!';
+} else {
+    echo 'Error inserting data!';
+}
+
+// Закрываем соединение с базой данных
+$conn->Close();
+?>
+﻿
