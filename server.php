@@ -4,21 +4,28 @@ $dbFile = 'database.mdb'; // Путь к файлу базы данных MDB
 $conn = new COM('ADODB.Connection');
 $conn->Open("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=$dbFile");
 
-// Получаем данные из POST запроса
-$data = $_POST['data'];
-
-// Выполняем запрос к базе данных (пример)
-$sql = "INSERT INTO TableName (ColumnName) VALUES ('$data')";
+// Выполняем запрос на выборку данных из таблицы
+$sql = "SELECT * FROM TableName";
 $rs = $conn->Execute($sql);
 
-// Проверяем успешность выполнения запроса
-if ($rs) {
-    echo 'Data inserted successfully!';
+// Проверяем, есть ли результаты запроса
+if ($rs && !$rs->EOF) {
+    // Если есть результаты, выводим их
+    while (!$rs->EOF) {
+        // Получаем данные из текущей строки результата запроса
+        $data = $rs->Fields('ColumnName')->Value;
+        // Выводим данные на экран
+        echo 'Значение из базы данных: ' . $data . '<br>';
+        // Переходим к следующей строке результата запроса
+        $rs->MoveNext();
+    }
 } else {
-    echo 'Error inserting data!';
+    // Если нет результатов, выводим сообщение об отсутствии данных
+    echo 'Нет данных в базе данных.';
 }
 
 // Закрываем соединение с базой данных
 $conn->Close();
 ?>
+
 ﻿
