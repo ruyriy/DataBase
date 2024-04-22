@@ -13,7 +13,8 @@
     <script>
         async function readFromServer() {
             try {
-                const response = await fetch('http://your-server-address:3000/getYouTubeLinks');
+                const response = await fetch('https://your-server-address:3000/getYouTubeLinks');
+
                 const data = await response.json();
                 
                 if (data && data.length > 0) {
