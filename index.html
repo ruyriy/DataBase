@@ -2,38 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Read YouTube Links</title>
+    <title>Test Page</title>
 </head>
 <body>
-    <h1>Read YouTube Links</h1>
-    <p>Откройте консоль браузера для просмотра результатов.</p>
+    <a href="file:///path_to_script_folder/readLinks.js?pasteURL=https://www.youtube.com/@pravdachurch/videos">Загрузить ссылки</a>
 
-    <button onclick="startServer()">Запустить server.js</button>
-
-    <script>
-        async function readFromServer() {
-            try {
-                const response = await fetch('https://your-server-address:3000/getYouTubeLinks');
-
-                const data = await response.json();
-                
-                if (data && data.length > 0) {
-                    const links = data.map(item => item.href);
-                    const linkText = links.join('\n');
-                    console.log(linkText);
-                } else {
-                    console.error('Ссылки не найдены');
-                }
-            } catch (error) {
-                console.error('Ошибка при получении данных:', error);
-            }
-        }
-
-        function startServer() {
-            // Здесь вы можете добавить код для запуска server.js, например, отправив запрос к серверу
-            console.log('Запуск сервера...');
-            readFromServer();
-        }
-    </script>
+    <script src="readLinks.js"></script>
 </body>
 </html>
