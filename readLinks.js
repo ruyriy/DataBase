@@ -1,4 +1,6 @@
 function readFromPastebin(pasteURL) {
+    var corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/' + pasteURL;
+
     var xmlHttp = new XMLHttpRequest();
     var htmlDoc = document.implementation.createHTMLDocument("YouTube Links");
     var regex = new RegExp('"url":"\\/watch[^"]+"', 'g');
@@ -6,7 +8,8 @@ function readFromPastebin(pasteURL) {
 
     try {
         // Открытие URL с использованием GET-запроса
-        xmlHttp.open("GET", pasteURL, false);
+        xmlHttp.open("GET", corsAnywhereUrl, false);
+        xmlHttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
         xmlHttp.send();
 
         // Проверка статуса ответа
