@@ -1,4 +1,4 @@
-﻿function readFromPastebin(pasteURL) {
+function readFromPastebin(pasteURL) {
     var xmlHttp = new XMLHttpRequest();
     var htmlDoc = document.implementation.createHTMLDocument("YouTube Links");
     var regex = new RegExp('"url":"\\/watch[^"]+"', 'g');
@@ -32,11 +32,12 @@
 // При загрузке страницы
 window.onload = function() {
     // Получение параметра из URL
-    var urlParam = new URLSearchParams(window.location.search).get('pasteURL');
+    var urlParams = new URLSearchParams(window.location.search);
+    var pasteURL = urlParams.get('pasteURL');
 
-    if (urlParam) {
+    if (pasteURL) {
         try {
-            var links = readFromPastebin(urlParam);
+            var links = readFromPastebin(pasteURL);
             // Здесь можно добавить код для отображения найденных ссылок на странице
             console.log(links);
         } catch (error) {
