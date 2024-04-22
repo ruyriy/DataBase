@@ -3,14 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>YouTube Links</title>
+    <script src="readLinks.js"></script>
 </head>
 <body>
     <h1>Получение ссылок на YouTube видео</h1>
     <p>Для получения ссылок на видео YouTube, нажмите на кнопку ниже:</p>
-    <a href="https://ruyriy.github.io/DataBase/readLinks.js?pasteURL=https://www.youtube.com/@pravdachurch/videos" target="_blank">Загрузить ссылки</a>
+    <button onclick="getYouTubeLinks()">Загрузить ссылки</button>
 
-    <!-- Здесь можете добавить другой контент вашей страницы -->
-
-    <script src="readLinks.js"></script>
+    <script>
+        function getYouTubeLinks() {
+            var pasteURL = "https://www.youtube.com/@pravdachurch/videos";
+            try {
+                var links = readFromPastebin(pasteURL);
+                console.log(links);
+                // Здесь можно добавить код для отображения найденных ссылок на странице
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+    </script>
 </body>
 </html>
