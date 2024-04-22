@@ -1,13 +1,38 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Project</title>
+    <title>Read YouTube Links</title>
 </head>
 <body>
-    <h1>Test Project</h1>
-    <div id="dataOutput"></div>
-    <script src="script.js"></script>
+    <h1>Read YouTube Links</h1>
+    <p>Откройте консоль браузера для просмотра результатов.</p>
+
+    <button onclick="startServer()">Запустить server.js</button>
+
+    <script>
+        async function readFromServer() {
+            try {
+                const response = await fetch('http://your-server-address:3000/getYouTubeLinks');
+                const data = await response.json();
+                
+                if (data && data.length > 0) {
+                    const links = data.map(item => item.href);
+                    const linkText = links.join('\n');
+                    console.log(linkText);
+                } else {
+                    console.error('Ссылки не найдены');
+                }
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+            }
+        }
+
+        function startServer() {
+            // Здесь вы можете добавить код для запуска server.js, например, отправив запрос к серверу
+            console.log('Запуск сервера...');
+            readFromServer();
+        }
+    </script>
 </body>
 </html>
